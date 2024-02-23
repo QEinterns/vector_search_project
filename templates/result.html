@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/style3.css">
+    <link rel="stylesheet" href="https://unpkg.com/nice-forms.css@0.1.7/dist/nice-forms.css" />
+</head>
+<body>
+    <div class="container1">
+        <form class="formy" method="post">
+            <!-- <div class="formy"> -->
+                <div class="nice-form-group">
+                    <label style="font-weight:800;font-size: large;">Movie Name</label>
+                    <input type="text" placeholder="Movie Name" value="" id="movie_name" name="movie_name"/>
+                  </div>
+                <div class="nice-form-group">
+                    <label style="font-weight:800;font-size: large;">Query</label>
+                    <textarea rows="5" value="" id="query" name="query"></textarea>
+                  </div>
+                  
+                  <fieldset class="nice-form-group" style="border: none;">
+                    <legend style="font-weight:800;font-size: large;">Select your Query Enhancer LLM</legend>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="openorcaMistral" name="queryEnhancer" value="Openorca Mistral" />
+                        <label for="openorcaMistral">Openorca Mistral</label>
+                    </div>
+                    
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="openorcaSpectral" name="queryEnhancer" value="Openorca Spectral"/>
+                        <label for="openorcaSpectral">Openorca Spectral</label>
+                    </div>
+                </fieldset>
+                
+                <fieldset class="nice-form-group" style="border: none;">
+                    <legend style="font-weight:800;font-size: large;">Select your Text to Image model</legend>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="proteus" name="textToImage" value="Proteus"/>
+                        <label for="proteus">Proteus</label>
+                    </div>
+                    
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="playground" name="textToImage" value="Playground"/>
+                        <label for="playground">Playground</label>
+                    </div>
+                
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="openjourney" name="textToImage" value="Openjourney"/>
+                        <label for="openjourney">Openjourney</label>
+                    </div>
+                
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="stableDiffusionX" name="textToImage" value="Stable diffusion X"/>
+                        <label for="stableDiffusionX">Stable diffusion X</label>
+                    </div>
+                </fieldset>
+                
+                <div class="nice-form-group">
+                    <label style="font-weight:800;font-size: large;">Quality</label>
+                    <input type="range" min="0" max="15" name="quality" />
+                </div>
+                
+                <button type="submit" class="btn1" id="generateBtn">Generate</button>
+                  
+                
+        
+            <!-- </div> -->
+        </form>
+
+
+        <div class="righty">
+            <div class="modal">
+                <div class="modal-header">
+                    <div class="modal-logo">
+                        <span class="logo-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="419.116" viewBox="0 0 512 419.116">
+                                <defs>
+                                    <clipPath id="clip-folder-new">
+                                        <rect width="512" height="419.116" />
+                                    </clipPath>
+                                </defs>
+                                <g id="folder-new" clip-path="url(#clip-folder-new)">
+                                    <path id="Union_1" data-name="Union 1" d="M16.991,419.116A16.989,16.989,0,0,1,0,402.125V16.991A16.989,16.989,0,0,1,16.991,0H146.124a17,17,0,0,1,10.342,3.513L227.217,57.77H437.805A16.989,16.989,0,0,1,454.8,74.761v53.244h40.213A16.992,16.992,0,0,1,511.6,148.657L454.966,405.222a17,17,0,0,1-16.6,13.332H410.053v.562ZM63.06,384.573H424.722L473.86,161.988H112.2Z" fill="var(--c-action-primary)" stroke="" stroke-width="1" />
+                                </g>
+                            </svg>
+                        </span>
+                    </div>
+                    <!-- <button class="btn-close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" fill="var(--c-text-secondary)"/></svg>
+                    </button> -->
+                </div>
+                <div class="modal-body">
+                    <h2 class="modal-title">Generated Images</h2>
+                    <p class="modal-description">Model results</p>
+                    <div class="upload-area">
+                        
+                       
+                        <div class="image-grid">
+                            <div class="image">
+                                <img src="static/output/q1.png" alt="Image 1">
+                            </div>
+                            <div class="image">
+                                <img src="static/output/q2.png" alt="Image 2">
+                            </div>
+                            <div class="image">
+                                <img src="static/output/q3.png" alt="Image 3">
+                            </div>
+                            <div class="image">
+                                <img src="static/output/q4.png" alt="Image 4">
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button class="btn-secondary">Cancel</button> -->
+                    <button class="btn-primary"  id="downloadButton">Download images</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    
+    <div class="cus_nav">
+        <div class="wrapper">
+            <div class="navbar">
+                <div class="navbar__item -blue" id="home">
+                    <span class="navbar__icon">
+                        <svg class="icon">
+                          <use xlink:href="#icon-home"></use>
+                        </svg>
+                    </span>
+                </div>
+                <div class="navbar__item -orange">
+                    <span class="navbar__icon">
+                        <svg class="icon">
+                          <use xlink:href="#icon-cup"></use>
+                        </svg>
+                    </span>
+                </div>
+                <div class="navbar__item -navy-blue" id="create">
+                    <span class="navbar__icon">
+                        <svg class="icon">
+                          <use xlink:href="#icon-plus"></use>
+                        </svg>
+                    </span>
+                </div>
+                <div class="navbar__item -yellow">
+                    <span class="navbar__icon">
+                        <svg class="icon">
+                          <use xlink:href="#icon-search"></use>
+                        </svg>
+                    </span>
+                </div>
+                <div class="navbar__item -purple">
+                    <span class="navbar__icon">
+                        <svg class="icon">
+                          <use xlink:href="#icon-user"></use>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <svg style="display:none" xmlns="http://www.w3.org/2000/svg" hidden xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+          <symbol id="icon-plus" viewBox="0 0 32 32">
+            <title>plus</title>
+            <path d="M32 14.4v3.2c0 0.8-0.64 1.44-1.44 1.44h-11.68v11.52c0 0.8-0.64 1.44-1.44 1.44h-3.040c-0.8 0-1.44-0.64-1.44-1.44v-11.52h-11.52c-0.8 0-1.44-0.64-1.44-1.44v-3.2c0-0.8 0.64-1.44 1.44-1.44h11.68v-11.52c-0.16-0.8 0.48-1.44 1.28-1.44h3.2c0.8 0 1.44 0.64 1.44 1.44v11.68h11.68c0.64-0.16 1.28 0.48 1.28 1.28z"></path>
+          </symbol>
+          <symbol id="icon-search" viewBox="0 0 32 32">
+          <title>search</title>
+            <path d="M30.56 28.64l-5.76-5.76c2.24-2.4 3.52-5.6 3.52-9.12 0-7.52-6.24-13.76-13.76-13.76s-13.76 6.24-13.76 13.76 6.24 13.76 13.76 13.76c2.72 0 5.12-0.8 7.36-2.080l6.080 6.080c0.32 0.32 0.8 0.48 1.28 0.48s0.96-0.16 1.28-0.48c0.8-0.8 0.8-2.080 0-2.88zM4.64 13.76c0-5.44 4.48-9.92 9.92-9.92s9.92 4.48 9.92 9.92-4.48 9.92-9.92 9.92-9.92-4.48-9.92-9.92z"></path>
+          </symbol>
+          <symbol id="icon-user" viewBox="0 0 32 32">
+            <title>user</title>
+            <path d="M16 0.64c4.16 0 7.52 3.36 7.52 7.36 0 4.16-3.36 7.52-7.52 7.52s-7.36-3.36-7.36-7.52c-0.16-4 3.2-7.36 7.36-7.36zM16 2.56c-3.2 0-5.6 2.56-5.6 5.6s2.4 5.6 5.6 5.6 5.76-2.56 5.76-5.76-2.56-5.44-5.76-5.44z"></path>
+            <path d="M16 16.32c-2.24 0-4.16-0.8-5.76-2.4s-2.4-3.68-2.4-5.76c0-2.24 0.8-4.16 2.4-5.76s3.52-2.4 5.76-2.4c4.48 0 8.16 3.68 8.16 8.16s-3.68 8.16-8.16 8.16zM16 1.44c-1.76 0-3.52 0.64-4.8 1.92s-1.92 3.040-1.92 4.8c0 1.76 0.64 3.52 1.92 4.8s2.88 1.92 4.8 1.92c3.84 0 6.72-3.040 6.72-6.72s-3.040-6.72-6.72-6.72zM16 14.56c-3.52 0-6.4-2.88-6.4-6.4 0-1.76 0.64-3.36 1.92-4.48s2.72-1.92 4.48-1.92c3.68 0 6.4 2.72 6.4 6.4 0 1.76-0.64 3.36-1.92 4.48-1.28 1.28-2.88 1.92-4.48 1.92zM16 3.2c-1.44 0-2.56 0.48-3.52 1.44s-1.44 2.080-1.44 3.52c0 2.72 2.24 4.96 4.96 4.96 1.28 0 2.56-0.48 3.52-1.44s1.44-2.24 1.44-3.52c0-2.72-2.24-4.96-4.96-4.96z"></path>
+            <path d="M3.68 30.4c0 1.12-1.76 1.12-1.76 0v-3.68c0-4.64 3.84-8.48 8.48-8.48h11.36c4.64 0 8.48 3.84 8.48 8.48v3.68c0 1.12-1.76 1.12-1.76 0v-3.68c0-3.68-3.040-6.72-6.72-6.72h-11.36c-3.68 0-6.72 3.040-6.72 6.72v3.68z"></path>
+            <path d="M29.28 32c-0.96 0-1.6-0.64-1.6-1.6v-3.68c0-1.6-0.64-3.040-1.76-4.16s-2.56-1.76-4.16-1.76h-11.36c-1.6 0-3.040 0.64-4.16 1.76s-1.76 2.56-1.76 4.16v3.68c0 0.96-0.64 1.6-1.6 1.6s-1.6-0.64-1.6-1.6v-3.68c0-2.4 0.96-4.8 2.72-6.56 1.6-1.6 3.84-2.56 6.4-2.56h11.36c2.4 0 4.8 0.96 6.56 2.72s2.72 4 2.72 6.56v3.52c-0.16 0.96-0.8 1.6-1.76 1.6zM10.4 19.36h11.36c1.92 0 3.84 0.8 5.28 2.24s2.24 3.2 2.24 5.28v3.52c0 0 0 0.16 0.16 0.16s0.16-0.16 0.16-0.16v-3.68c0-2.080-0.8-4-2.24-5.44s-3.36-2.24-5.44-2.24h-11.52c-2.080 0-4 0.8-5.44 2.24s-2.24 3.36-2.24 5.44v3.68c0 0 0 0.16 0.16 0.16s0-0.16 0-0.16v-3.68c0-1.92 0.8-3.84 2.24-5.28 1.44-1.28 3.2-2.080 5.28-2.080z"></path>
+          </symbol>
+          <symbol id="icon-cup" viewBox="0 0 32 32">
+            <title>cup</title>
+            <path d="M28 4h-1.28v-2.72c0-0.8-0.64-1.28-1.28-1.28h-18.72c-0.8 0-1.44 0.64-1.44 1.28v2.72h-1.28c-2.24 0-4 1.76-4 4v1.28c0 2.24 1.76 4 4 4h1.76c0.8 3.2 3.2 5.92 6.24 7.2v3.52h-1.28c-2.24 0-4 1.76-4 4v2.72c0 0.64 0.48 1.28 1.28 1.28h16c0.8 0 1.28-0.64 1.28-1.28v-2.72c0-2.24-1.76-4-4-4h-1.28v-3.52c3.2-1.28 5.44-4 6.4-7.2h1.6c2.24 0 4-1.76 4-4v-1.28c0-2.24-1.76-4-4-4zM4 10.72c-0.8 0-1.28-0.64-1.28-1.44v-1.28c0-0.8 0.64-1.28 1.28-1.28h1.28v4h-1.28zM22.72 28v1.28h-13.44v-1.28c0-0.8 0.64-1.28 1.28-1.28h10.72c0.8 0 1.44 0.48 1.44 1.28zM17.28 24h-2.56v-2.72c0.96 0.16 1.76 0.16 2.72 0v2.72zM16 18.72c-4.48 0-8-3.52-8-8v-8h16v8c0 4.32-3.52 8-8 8zM29.28 9.28c0 0.8-0.64 1.28-1.28 1.28h-1.28v-3.84h1.28c0.8 0 1.28 0.64 1.28 1.28v1.28z"></path>
+          </symbol>
+          <symbol id="icon-home" viewBox="0 0 32 32">
+            <title>home</title>
+            <path d="M16 4.48l12.48 9.92v14.080h-24.96v-14.080l12.48-9.92zM16 0.48l-15.52 12.48v18.72h31.040v-18.72l-15.52-12.48z"></path>
+            <path d="M32 32h-32v-19.2l16-12.8 16 12.8v19.2zM0.8 31.2h30.4v-18.080l-15.2-12.16-15.2 12.16v18.080zM28.8 28.8h-25.6v-14.56l12.8-10.24 12.8 10.24v14.56zM4 28h24.16v-13.44l-12-9.6-12 9.6v13.44z"></path>
+          </symbol>
+        </defs>
+        </svg>
+    </div>
+
+    <script>
+      // JavaScript to allow only one checkbox to be selected per group
+      const queryEnhancerCheckboxes = document.querySelectorAll('input[name="queryEnhancer"]');
+      const textToImageCheckboxes = document.querySelectorAll('input[name="textToImage"]');
+      
+      function handleCheckboxGroup(group) {
+          group.forEach((checkbox) => {
+              checkbox.addEventListener('click', function() {
+                  group.forEach((cb) => {
+                      if (cb !== checkbox && cb.checked) {
+                          cb.checked = false;
+                      }
+                  });
+              });
+          });
+      }
+      
+      handleCheckboxGroup(queryEnhancerCheckboxes);
+      handleCheckboxGroup(textToImageCheckboxes);
+  
+      // JavaScript to handle generating and posting the response
+      document.getElementById('generateBtn').addEventListener('click', function() {
+          const selectedQueryEnhancer = document.querySelector('input[name="queryEnhancer"]:checked');
+          const selectedTextToImage = document.querySelector('input[name="textToImage"]:checked');
+          const quality = document.querySelector('input[type="range"]').value;
+  
+          // Create response object
+          const response = {
+              queryEnhancer: selectedQueryEnhancer ? selectedQueryEnhancer.value : null,
+              textToImage: selectedTextToImage ? selectedTextToImage.value : null,
+              quality: quality
+          };
+  
+          // Post response object
+          console.log(response); // Replace with your actual code to post the response
+      });
+  </script>
+
+<script>
+    document.getElementById('downloadButton').addEventListener('click', function() {
+        // Send an AJAX request to the Flask route
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/download_files', true);
+        xhr.responseType = 'blob'; // Set the response type to blob
+        xhr.onload = function() {
+            // Check if the request was successful
+            if (xhr.status === 200) {
+                // Create a blob URL from the response
+                var blob = new Blob([xhr.response], { type: 'application/zip' });
+                var url = window.URL.createObjectURL(blob);
+    
+                // Create a temporary link element
+                var link = document.createElement('a');
+                link.href = url;
+                link.download = 'files.zip'; // Specify the filename for the download
+                document.body.appendChild(link);
+    
+                // Trigger the download
+                link.click();
+    
+                // Clean up
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(link);
+            }
+        };
+        xhr.send();
+    });
+    </script>
+    <script>
+        $(document).ready(function() {
+    
+            $('#home').click(function() {
+                window.location.href = '/';
+            });
+        });
+        </script>
+
+<script>
+    $(document).ready(function() {
+
+        $('#create').click(function() {
+            window.location.href = '/create';
+        });
+    });
+    </script>
+
+
+</body>
+
+</html>
