@@ -60,7 +60,7 @@ else:
     embeddings = np.nan_to_num(embeddings)
 
     # Perform PCA to reduce dimensionality
-    pca = PCA(n_components=2)
+    pca = PCA(n_components=3)
     embeddings_pca = pca.fit_transform(embeddings)
 
     # Plot the reduced-dimensional embeddings
