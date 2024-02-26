@@ -2,8 +2,9 @@ from datetime import timedelta
 import numpy as np
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
-from couchbase.cluster import Cluster
 from couchbase.auth import PasswordAuthenticator
+from couchbase.cluster import Cluster
+from couchbase.options import ClusterOptions
 
 #connect2couchbase
 username = "Administrator"
@@ -26,24 +27,44 @@ cb_coll = cb.scope(scope_name).collection(collection_name)
 def extract_embeddings_from_documents(documents):
     embeddings = []
     for doc in documents:
-        embedding = doc.get('vector_data') 
-        embeddings.append(embedding)
-    return np.array(embeddings)
+        embedding = doc.get('c1').get('vector_data') 
+        if embedding is not None:  # Check for missing values
+            embeddings.append(embedding)
+    return embeddings
 
 # Retrieve all relevant documents from Couchbase
-query = "SELECT * FROM b1" 
-result = cluster.query(query)
+# query = "SELECT * FROM b1" 
+# result = cluster.query(query)
+# print(result)
+
+# result = cb_coll.get()
+# print(result.content_as[str])
+
+scope = cb.scope('s1')
+sql_query = 'SELECT * FROM c1'
+result = scope.query(sql_query)
+# for row in result:
+#     print(row)
 
 # Extract embeddings from documents
 embeddings = extract_embeddings_from_documents(result)
+print(embeddings)
 
-# Perform PCA to reduce dimensionality
-pca = PCA(n_components=2)
-embeddings_pca = pca.fit_transform(embeddings)
+if len(embeddings) == 0:
+    print("No embeddings found.")
 
-# Plot the reduced-dimensional embeddings
-plt.scatter(embeddings_pca[:, 0], embeddings_pca[:, 1])
-plt.title('PCA Visualization of Embeddings')
-plt.xlabel('Principal Component 1')
-plt.ylabel('Principal Component 2')
-plt.show()
+else:
+    # Perform PCA only if there are embeddings
+    # Handle missing values by removing them
+    embeddings = np.nan_to_num(embeddings)
+
+    # Perform PCA to reduce dimensionality
+    pca = PCA(n_components=2)
+    embeddings_pca = pca.fit_transform(embeddings)
+
+    # Plot the reduced-dimensional embeddings
+    plt.scatter(embeddings_pca[:, 0], embeddings_pca[:, 1])
+    plt.title('PCA Visualization of Embeddings')
+    plt.xlabel('Principal Component 1')
+    plt.ylabel('Principal Component 2')
+    plt.show()
