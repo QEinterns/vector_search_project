@@ -1,26 +1,37 @@
+from datetime import timedelta
 import numpy as np
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 from couchbase.cluster import Cluster
 from couchbase.auth import PasswordAuthenticator
 
-# Connect to the Couchbase cluster
-cluster = Cluster('couchbase://your_host')
-authenticator = PasswordAuthenticator('username', 'password')
-cluster.authenticate(authenticator)
-bucket = cluster.bucket('your_bucket')
-collection = bucket.default_collection()
+#connect2couchbase
+username = "Administrator"
+password = "password"
+bucket_name = "b1"
+scope_name = "s1"
+collection_name = "c1"
+        
+auth = PasswordAuthenticator(
+    username,
+    password,
+)
 
+cluster = Cluster('couchbase://172.23.108.107', ClusterOptions(auth))
+cluster.wait_until_ready(timedelta(seconds=5))
+cb = cluster.bucket(bucket_name)
+cb_coll = cb.scope(scope_name).collection(collection_name)
+    
 # Define a function to extract embeddings from documents
 def extract_embeddings_from_documents(documents):
     embeddings = []
     for doc in documents:
-        embedding = doc.get('embedding_field')  # Replace 'embedding_field' with the field name containing the embedding
+        embedding = doc.get('vector_data') 
         embeddings.append(embedding)
     return np.array(embeddings)
 
 # Retrieve all relevant documents from Couchbase
-query = "SELECT * FROM your_bucket WHERE condition"  # Define your query condition
+query = "SELECT * FROM b1" 
 result = cluster.query(query)
 
 # Extract embeddings from documents
