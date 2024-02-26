@@ -2,6 +2,7 @@ from datetime import timedelta
 import numpy as np
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
+from matplotlib.colors import Normalize
 from couchbase.auth import PasswordAuthenticator
 from couchbase.cluster import Cluster
 from couchbase.options import ClusterOptions
@@ -63,8 +64,12 @@ else:
     embeddings_pca = pca.fit_transform(embeddings)
 
     # Plot the reduced-dimensional embeddings
-    plt.scatter(embeddings_pca[:, 0], embeddings_pca[:, 1])
+    # Assign different colors based on a gradient
+    norm = Normalize()
+    colors = plt.cm.viridis(norm(range(len(embeddings_pca))))
+    scatter = plt.scatter(embeddings_pca[:, 0], embeddings_pca[:, 1], c=colors)
     plt.title('PCA Visualization of Embeddings')
     plt.xlabel('Principal Component 1')
     plt.ylabel('Principal Component 2')
+    plt.colorbar(scatter, label='Index')
     plt.show()
