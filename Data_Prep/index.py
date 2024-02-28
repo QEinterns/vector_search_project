@@ -32,7 +32,7 @@ curl -XPUT -H "Content-Type: application/json" \
     "store_dynamic": false,
     "type_field": "_type",
     "types": {{
-     "s1.c1": {{
+     "s1.c2": {{
       "dynamic": false,
       "enabled": true,
       "properties": {{
@@ -41,7 +41,7 @@ curl -XPUT -H "Content-Type: application/json" \
        "dynamic": false,
        "fields": [
         {{
-         "dims": 384,
+         "dims": 1024,
          "index": true,
          "name": "vector_data",
          "similarity": "l2_norm",

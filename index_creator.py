@@ -40,7 +40,7 @@ curl -XPUT -H "Content-Type: application/json" \
        "dynamic": false,
        "fields": [
         {{
-         "dims": 384,
+         "dims": 1024,
          "index": true,
          "name": "vector_data",
          "similarity": "l2_norm",

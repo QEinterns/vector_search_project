@@ -1,7 +1,7 @@
 import os
 
 def get_files():
-    path = "/Users/spatra/Desktop/Data_Prep/docs"
+    path = "/Users/spatra/Desktop/Movie/Data_Prep/docs"
 
     # list to store files
     res = []
@@ -12,5 +12,5 @@ def get_files():
         if os.path.isfile(os.path.join(path, file_path)):
             # add filename to list
             res.append(os.path.join(path, file_path))
-    return res[3287:]
+    return res[:3286] + res[3287:]
 

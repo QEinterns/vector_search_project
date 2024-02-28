@@ -1,18 +1,22 @@
 from dependencies import *
-
+from FlagEmbedding import BGEM3FlagModel
+embed_model = BGEM3FlagModel('BAAI/bge-m3',  use_fp16=True)
 class NumpyEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, np.ndarray):
             return obj.tolist()
         return JSONEncoder.default(self, obj)
     
-model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+# model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+
+
 
 def embed(chunks, name, cb_coll):
 
     docid_counter  = 1
     for sentence in chunks:
-        emb = model.encode(str(sentence.page_content))
+        # emb = model.encode(str(sentence.page_content))
+        emb = embed_model.encode(str(sentence.page_content), batch_size=12, max_length=600, )['dense_vecs']
         embedding = np.array(emb)
         np.set_printoptions(suppress=True)
 
