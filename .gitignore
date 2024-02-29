@@ -6,3 +6,5 @@ docs/
 config.py
 data/
 .txt
+.json
+.jsonl
