@@ -5,3 +5,4 @@ __pycache__
 docs/
 config.py
 data/
+.txt
