@@ -5,6 +5,6 @@ __pycache__
 docs/
 config.py
 data/
-.txt
-.json
-.jsonl
+*.txt
+*.json
+*.jsonl
