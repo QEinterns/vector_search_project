@@ -9,3 +9,4 @@ data/
 *.json
 *.jsonl
 *.npz
+models/
