@@ -9,3 +9,6 @@ data/
 *.jsonl
 *.npz
 models/
+Internal_docs/
+llama.cpp/
+mlx-examples/
