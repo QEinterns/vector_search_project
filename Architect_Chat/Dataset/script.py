@@ -13,22 +13,25 @@ def query_ollama(prompt, domain, context='', model='llama2'):
     followup_response.raise_for_status()
     return response.json()['response'].strip(), followup_response.json()['response'].replace("\"", "").strip()
 
-def create_validation_file(train_file, valid_file, split_ratio):
-    with open(train_file, 'r') as file:
+def create_validation_file(temp_file, train_file, valid_file, test_file):
+    with open(temp_file, 'r') as file:
         lines = file.readlines()
-    valid_lines = lines[:int(len(lines) * split_ratio)]
-    train_lines = lines[int(len(lines) * split_ratio):]
-    with open(train_file, 'w') as file:
+    train_lines = lines[:int(len(lines) * 0.8)]
+    test_lines = lines[int(len(lines) * 0.8):int(len(lines) * 0.9)]
+    valid_lines = lines[int(len(lines) * 0.9):]
+    with open(train_file, 'a') as file:
         file.writelines(train_lines)
-    with open(valid_file, 'w') as file:
+    with open(valid_file, 'a') as file:
         file.writelines(valid_lines)
+    with open(test_file, 'a') as file:
+        file.writelines(test_lines)
 
 def load_domain(domain_file):
     with open(domain_file, 'r') as file:
         domain = file.read().strip()
     return domain
 
-def main(instructions_file, train_file, valid_file, split_ratio, domain_file, context=''):
+def main(temp_file, instructions_file, train_file, valid_file, test_file, domain_file, context=''):
     # path = "/Users/spatra/Desktop/Movie/Architect_Chat/Dataset/"
     if not Path(instructions_file).is_file():
         sys.exit(f'{instructions_file} not found.')
@@ -43,13 +46,13 @@ def main(instructions_file, train_file, valid_file, split_ratio, domain_file, co
         result = json.dumps({
             'text': f'<s>[INST] {instruction}[/INST] {answer}</s>[INST]{followup_question}[/INST]'
         }) + "\n"
-        with open(train_file, 'a') as file:
+        with open(temp_file, 'a') as file:
             file.write(result)
-    create_validation_file(train_file, valid_file, split_ratio)
-    print("Done! Training and validation JSONL files created.")
+    create_validation_file(temp_file, train_file, valid_file, test_file)
+    print("Done! Training, testing and validation JSONL files created.")
     
 if __name__ == "__main__":
     if len(sys.argv) != 7:
-        sys.exit("Usage: python script.py <instructions.json> <train.jsonl> <valid.jsonl> <split_ratio> <domain_file> <context>")
+        sys.exit("Usage: python script.py <instructions.json> <train.jsonl> <valid.jsonl> <test_file> <domain_file> <context>")
     path = "/Users/spatra/Desktop/Movie/Architect_Chat/Dataset/"
-    main(path + sys.argv[1], path + sys.argv[2], path + sys.argv[3], float(sys.argv[4]), path + sys.argv[5], sys.argv[6])
+    main(path + "temp.jsonl", path + sys.argv[1], path + sys.argv[2], path + sys.argv[3], path + sys.argv[4], path + "raw/" + sys.argv[5], sys.argv[6])
