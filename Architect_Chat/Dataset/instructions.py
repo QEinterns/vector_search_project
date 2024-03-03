@@ -1,6 +1,5 @@
 import json
 import nltk
-from nltk.tokenize import sent_tokenize
 
 def load_domain_knowledge(domain_file):
     with open(domain_file, 'r') as file:
@@ -11,7 +10,7 @@ def generate_instructions(domain_knowledge, context):
     instructions = []
 
     # Tokenize domain knowledge into sentences
-    sentences = sent_tokenize(domain_knowledge)
+    sentences = nltk.sent_tokenize(domain_knowledge)
 
     # Generate logical questions based on sentences
     for sentence in sentences:
@@ -38,7 +37,7 @@ def main(domain_file, context, output_file):
     directory = "/Users/spatra/Desktop/Movie/Architect_Chat/Dataset/"
 
     # Load domain knowledge from file
-    domain_knowledge = load_domain_knowledge(directory + domain_file)
+    domain_knowledge = load_domain_knowledge(directory + "raw/" + domain_file)
 
     # Generate instructions
     instructions = generate_instructions(domain_knowledge, context)
@@ -51,4 +50,6 @@ if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Usage: python instructions.py <domain_file> <context> <output_file>")
         sys.exit(1)
+    nltk.download('punkt')  # Download the punkt tokenizer
+    nltk.download('averaged_perceptron_tagger')  # Download the POS tagger model
     main(sys.argv[1], sys.argv[2], sys.argv[3])
