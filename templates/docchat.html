@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/docstyle.css">
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="frnt">
+        <header class="header">
+            <div class="header-content responsive-wrapper">
+                <div class="header-logo">
+                    <a href="#" style="text-decoration: none;">
+                        <div class="logoonly">
+                            <img src="static/dashpics/logo.png" />
+                        </div>
+                        <h2 class="logotext">CBAAP</h2>
+                    </a>
+                </div>
+                <div class="header-navigation">
+                    <nav class="header-navigation-links">
+                        <a href="#"> Dashboard </a>
+                        <a href="#"> History </a>
+                    </nav>
+                    <div class="header-navigation-actions">
+                        <a href="#" class="button" onclick="logout()" style="background-color: rgb(30, 30, 30);color: white;margin-right: 0.3rem;">
+                            <i style="color: white;" class="ph-sign-out-bold"></i>
+                            <span>log out</span>
+                        </a>
+                        <a href="#" class="button">
+                            <i class="ph-article-bold"></i>
+                            <span>logger</span>
+                        </a>
+                        <a href="#" class="icon-button">
+                            <i class="ph-gear-bold"></i>
+                        </a>
+                        <a href="#" class="icon-button">
+                            <i class="ph-bell-bold"></i>
+                        </a>
+                        <a href="#" class="avatar">
+                            <img src="https://assets.codepen.io/285131/hat-man.png" alt="" />
+                        </a>
+                    </div>
+                </div>
+                <a href="#" class="button">
+                    <i class="ph-list-bold"></i>
+                    <span>Menu</span>
+                </a>
+            </div>
+        </header>
+    </div>
+    
+    <div class="bdy1">
+        <div class="wraps">
+            <div class="left">
+                <div id="sessions">
+                    <button id="newsns" onclick="newSession('{{ session_name }}')">New session</button>
+                </div>
+                <div class="button-container">
+                    <div id="senlist">
+                        <button class="session_item" onclick="loadSession('{{ session_name }}')">{{ session_name }}</button>
+                        <!-- <button class="session_item" onclick="loadSession('{{ session_name }}')">session1</button> -->
+                    </div>
+                </div>
+                
+            </div>
+            <div class="right">
+                <div id="chat-container">
+    
+                    <div id="{{ session_name }}">    
+                        <div id="chat-title">CB-Doc Chat</div>
+                        <div id="chat-display"></div>
+                        <div id="user-input-container">
+                            <input type="text" id="user-input" placeholder="Type your message...">
+                            <!-- <button onclick="sendMessage()">Send</button> -->
+                            <a onclick="sendMessage()" class="icon-button">
+                                <i class="ph-arrow-up-bold"></i>
+                            </a>
+                        </div>
+                        <!-- <!-- <div id="loader-active">hi</div> -->
+                        <div id="loader"></div>
+                        <!-- <div class="lds-hourglass"></div> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+        
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='docchat_script.js') }}"></script>
+    <script>
+        function logout() {
+        // Send an AJAX request to the logout route
+        fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // You may include a CSRF token in the request if your application uses CSRF protection
+            // body: JSON.stringify({ csrf_token: 'your_csrf_token' }),
+        })
+        .then(response => {
+            // Check if the logout was successful
+            if (response.ok) {
+                // Redirect to the login page or perform any other desired action
+                window.location.href = '/login';
+            } else {
+                // Handle error cases
+                console.error('Logout failed');
+            }
+        })
+        .catch(error => {
+            // Handle network errors
+            console.error('Network error:', error);
+        });
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+Time for embed model startup: 1.9177436828613281
+Time for couchbase connection: 3.1868600845336914
+Time for embed model startup: 3.306136131286621
+Time for couchbase connection: 3.1350419521331787

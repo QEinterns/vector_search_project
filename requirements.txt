@@ -1,0 +1,17 @@
+Flask
+FlagEmbedding
+ollama
+psutil
+Flask-Session
+SQLAlchemy
+Werkzeug
+llama-cpp-python
+PyPDF2
+nltk
+langchain
+sentence-transformers
+diffusers
+gpt4all
+torch
+wikipedia
+flask_sqlalchemy

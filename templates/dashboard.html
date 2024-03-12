@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/dashstyle.css">
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <title>Dashboard</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content responsive-wrapper">
+            <div class="header-logo">
+                <a href="#" style="text-decoration: none;">
+                    <div class="logoonly">
+                        <img src="static/dashpics/logo.png" />
+                    </div>
+                    <h2 class="logotext">CBAAP</h2>
+                </a>
+            </div>
+            <div class="header-navigation">
+                <nav class="header-navigation-links">
+                    <a href="#"> Home </a>
+                    <a href="#"> History </a>
+                </nav>
+                <div class="header-navigation-actions">
+                    <a href="#" class="button" onclick="logout()" style="background-color: rgb(30, 30, 30);color: white;margin-right: 0.3rem;">
+                        <i style="color: white;" class="ph-sign-out-bold"></i>
+                        <span>log out</span>
+                    </a>
+                    <a href="#" class="button" onclick="logger()">
+                        <i class="ph-article-bold"></i>
+                        <span>logger</span>
+                    </a>
+                    <a href="#" class="icon-button">
+                        <i class="ph-gear-bold"></i>
+                    </a>
+                    <a href="#" class="icon-button">
+                        <i class="ph-bell-bold"></i>
+                    </a>
+                    <div>
+                        <a id="user-icon" class="user-icon" href="#" class="avatar">
+                            <img src="https://assets.codepen.io/285131/hat-man.png" alt="" />
+                        </a>
+                        <div id="user-info" class="user-info">
+                            <div id="username" class="user-info-item"></div>
+                            <div id="email" class="user-info-item"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <a href="#" class="button">
+                <i class="ph-list-bold"></i>
+                <span>Menu</span>
+            </a>
+        </div>
+    </header>
+    <main class="main">
+        <div class="responsive-wrapper">
+            <div class="main-header">
+                <h1>Dashboard</h1>
+            </div>
+            
+            <div class="content">
+                <div class="content-panel">
+                    <div class="vertical-tabs">
+                        <a href="#" id="viewAll" >View all</a>
+                        <a href="#" id="productivity">Productivity</a>
+                        <a href="#" id="fancy">Fun</a>
+                    </div>
+                </div>
+                <div class="content-main">
+                    <div class="card-grid">
+                        <article class="card" id="imagine">
+                            <div class="card-header">
+                                <div>
+                                    <span><img src="static/dashpics/imagine.png" /></span>
+                                    <h3>Imagine</h3>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>Recreate your own movie stills in simple queries</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/create" target="_blank" >Launch App</a>
+                            </div>
+                        </article>
+
+                        <article class="card" id="docchat">
+                            <div class="card-header">
+                                <div>
+                                    <span><img src="static/dashpics/dochat.png" /></span>
+                                    <h3>CB-Doc Chat</h3>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>Caters all the queries from Couchbase documentation</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/doc_chat" target="_blank" id="docChatLaunch">Launch App</a>
+                            </div>
+                        </article>
+
+                        <article class="card" id="archibot">
+                            <div class="card-header">
+                                <div>
+                                    <span><img src="static/dashpics/archibot.png" /></span>
+                                    <h3>CB-Architect Chat</h3>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>Caters all the queries from Couchbase Architecture and Internal docs</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/archi_chat" target="_blank">Launch App</a>
+                            </div>
+                        </article>
+
+                   </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const viewAllLink = document.getElementById("viewAll");
+            const productivityLink = document.getElementById("productivity");
+            const fancyLink = document.getElementById("fancy");
+
+            const cards = document.querySelectorAll(".card");
+
+            function showAllCards() {
+                cards.forEach(card => {
+                    card.style.display = "block";
+                });
+            }
+
+            function hideAllCards() {
+                cards.forEach(card => {
+                    card.style.display = "none";
+                });
+            }
+
+            function showProductivityCards() {
+                cards.forEach(card => {
+                    if (card.id !== "imagine") {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            }
+
+            function showFancyCards() {
+                cards.forEach(card => {
+                    if (card.id === "imagine") {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            }
+
+            viewAllLink.addEventListener("click", function(event) {
+                event.preventDefault();
+                showAllCards();
+            });
+
+            productivityLink.addEventListener("click", function(event) {
+                event.preventDefault();
+                showProductivityCards();
+            });
+
+            fancyLink.addEventListener("click", function(event) {
+                event.preventDefault();
+                showFancyCards();
+            });
+
+
+
+            var userIcon = document.getElementById("user-icon");
+            var userInfo = document.getElementById("user-info");
+            var usernameElement = document.getElementById("username");
+            var emailElement = document.getElementById("email");
+
+            // Mock user data (replace with actual user data)
+            var userData = {
+                username: "JohnDoe",
+                email: "johndoe@example.com"
+            };
+
+            userIcon.addEventListener("click", function() {
+                // Display user information when user clicks the icon
+                usernameElement.textContent = "Username: " + userData.username;
+                emailElement.textContent = "Email: " + userData.email;
+                userInfo.classList.toggle("active");
+            });
+            document.addEventListener("click", function(event) {
+        if (!userInfo.contains(event.target) && !userIcon.contains(event.target)) {
+            userInfo.classList.remove("active");
+        }
+    });
+
+            // const docChatLink = document.querySelector('#docChatLaunch');
+
+            // docChatLink.addEventListener('click', function(event) {
+            //     event.preventDefault();
+            //     launchDocChat();
+            // });
+
+            // function launchDocChat() {
+            //     fetch('/doc_chat')
+            //         .then(response => response.text())
+            //         .then(data => {
+            //             // Update the DOM with the received template
+            //             document.body.innerHTML = data;
+            //         })
+            //         .catch(error => console.error('Error:', error));
+            // }
+            });
+
+
+            function logout() {
+        // Send an AJAX request to the logout route
+        fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // You may include a CSRF token in the request if your application uses CSRF protection
+            // body: JSON.stringify({ csrf_token: 'your_csrf_token' }),
+        })
+        .then(response => {
+            // Check if the logout was successful
+            if (response.ok) {
+                // Redirect to the login page or perform any other desired action
+                window.location.href = '/login';
+            } else {
+                // Handle error cases
+                console.error('Logout failed');
+            }
+        })
+        .catch(error => {
+            // Handle network errors
+            console.error('Network error:', error);
+        });
+    }
+
+    function logger() {
+        fetch('/view_logs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // You may include a CSRF token in the request if your application uses CSRF protection
+            // body: JSON.stringify({ csrf_token: 'your_csrf_token' }),
+        })
+        .then(response => {
+            // Check if the logout was successful
+            if (response.ok) {
+                // Redirect to the login page or perform any other desired action
+                window.location.href = '/view_logs';
+            } else {
+                // Handle error cases
+                console.error('Logger failed');
+            }
+        })
+        .catch(error => {
+            // Handle network errors
+            // console.error('Network error:', error);
+        });
+    }
+    </script>
+</body>
+</html>
