@@ -282,7 +282,7 @@ with open('execution_time.txt', 'a') as file:
                 bot_response = "Sorry! There is some problem with LLM. Try again!"
                 break
             user_input = user_input + "Answer in short and precise."
-            response = ollama.chat(model='couch1',messages = [
+            response = ollama.chat(model='couch2',messages = [
             {"role": "system", "content": "You are a helpful bot who reads context and conversation history and answers questions about them.Answer precisely and in less than 50 words. Only use the context and conversation history to answer the question."},
             {"role": "user", "content": f"text :{context}. Conversation history:{session['history']}. QUESTION: {user_input}"},
             ])
@@ -425,7 +425,7 @@ with open('execution_time.txt', 'a') as file:
                 bot_response = "Sorry! There is some problem with LLM. Try again!"
                 break
             user_input = user_input + "Answer in short and precise."
-            response = ollama.chat(model='architect1',messages = [
+            response = ollama.chat(model='architect2',messages = [
             {"role": "system", "content": "You are a helpful bot who reads context and conversation history and answers questions about them.Answer precisely and in less than 50 words. Only use the context and conversation history to answer the question."},
             {"role": "user", "content": f"text :{context}. Conversation history:{session['history_a']}. QUESTION: {user_input}"},
             ])

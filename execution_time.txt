@@ -2,3 +2,12 @@ Time for embed model startup: 1.9177436828613281
 Time for couchbase connection: 3.1868600845336914
 Time for embed model startup: 3.306136131286621
 Time for couchbase connection: 3.1350419521331787
+Time for embed model startup: 1.8133811950683594
+Time for couchbase connection: 2.8606181144714355
+Time for parsing input: 0.0006670951843261719
+Time for embedding the input: 0.22053790092468262
+Time for getting the context: 3.2400310039520264
+Time for model response(current oi): 23.965226888656616
+Time for all the operations : 27.426597118377686
+Time for embed model startup: 3.5439319610595703
+Time for couchbase connection: 2.9066967964172363
