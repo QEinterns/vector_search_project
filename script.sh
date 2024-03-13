@@ -23,7 +23,7 @@ pip install -r "${CURRENT_DIR}/requirements.txt"
 MODELFILE="${CURRENT_DIR}/modelfile"
 touch "${MODELFILE}"
 
-echo "FROM \"${CURRENT_DIR}/architect_chat_models/architect_model.gguf\"" > "${MODELFILE}"
+echo "FROM \"${CURRENT_DIR}/architect_model.gguf\"" > "${MODELFILE}"
 echo "PARAMETER stop \"<|im_start|>\"" >> "${MODELFILE}"
 echo "PARAMETER stop \"<|im_end|>\"" >> "${MODELFILE}"
 echo "TEMPLATE \"\"\"" >> "${MODELFILE}"
@@ -49,7 +49,7 @@ MODELFILE="${CURRENT_DIR}/modelfile"
 touch "${MODELFILE}"
 
 # Update the modelfile content for couch1
-echo "FROM \"${CURRENT_DIR}/doc_chat_models/doc_chat_model.gguf\"" > "${MODELFILE}"
+echo "FROM \"${CURRENT_DIR}/doc_chat_model.gguf\"" > "${MODELFILE}"
 echo "PARAMETER stop \"<|im_start|>\"" >> "${MODELFILE}"
 echo "PARAMETER stop \"<|im_end|>\"" >> "${MODELFILE}"
 echo "TEMPLATE \"\"\"" >> "${MODELFILE}"
