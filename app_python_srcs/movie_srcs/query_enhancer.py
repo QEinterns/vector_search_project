@@ -7,7 +7,7 @@ def query_enhancer(context,query):
             context = context[:9500]
 
       llm = Llama(
-            model_path='query_enhancer/mistral-7b-openorca.Q4_0.gguf',
+            model_path='../mistral-7b-openorca.Q4_0.gguf',
             n_ctx=10000,
       )
       output = llm(
